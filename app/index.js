@@ -87,9 +87,6 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     //Resources
     this.copy('app/resources/js/_app.js', 'app/resources/js/app.js');
     this.copy('app/resources/sass/_main.scss', 'app/resources/sass/main.scss');
-
-
-
   },
 
   projectfiles: function () {

@@ -1,6 +1,6 @@
 {
   "name": "generator-craftcms",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
@@ -20,11 +20,13 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "craft",
+    "cms"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
     "chalk": "~0.4.0",
+    "yeoman-generator": "^0.16.0",
     "yosay": "^0.1.0"
   },
   "devDependencies": {

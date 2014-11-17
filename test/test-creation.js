@@ -21,11 +21,15 @@ describe('craftcms generator', function () {
     var expected = [
       // add files you expect to exist here.
       '.jshintrc',
-      '.editorconfig'
+      '.bowerrc',
+      '.gitignore',
+      'config.rb',
+      'gulpfile.js',
+      'package.json'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'craftLicense': true
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

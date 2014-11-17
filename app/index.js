@@ -14,7 +14,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
       if (!this.options['skip-install']) {
         this.installDependencies();
         //Download Craft
-        this.extract('http\x3A\x2F\x2Fdownload.buildwithcraft.com\x2Fcraft\x2F2.2\x2F2.2.2601\x2FCraft\x2D2.2.2601.zip', 'craft', this.craftWasDownloaded)
+        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', 'craft', this.craftWasDownloaded)
       }
     });
   },

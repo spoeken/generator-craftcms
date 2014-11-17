@@ -14,7 +14,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
       if (!this.options['skip-install']) {
         this.installDependencies();
         //Download Craft
-        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', 'craft', this.craftWasDownloaded)
+        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', 'craft', this.craftWasDownloaded);
       }
     });
   },
@@ -38,7 +38,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
         done();
       } else {
         console.log('');
-        console.log("You have yo agree with the license to download craft!");
+        console.log('You have yo agree with the license to download craft!');
         console.log('');
 
       }
@@ -47,7 +47,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
 
   craftWasDownloaded: function(){
     console.log('-----------------------------');
-    console.log("Craft download completed!");
+    console.log('Craft download completed!');
     console.log('-----------------------------');
   },
 
@@ -87,6 +87,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     //Resources
     this.copy('app/resources/js/_app.js', 'app/resources/js/app.js');
     this.copy('app/resources/sass/_main.scss', 'app/resources/sass/main.scss');
+    this.copy('app/resources/css/_main.css', 'app/resources/css/main.css');
   },
 
   projectfiles: function () {

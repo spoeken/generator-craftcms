@@ -13,6 +13,8 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
+        //Download Craft
+        this.extract('http\x3A\x2F\x2Fdownload.buildwithcraft.com\x2Fcraft\x2F2.2\x2F2.2.2601\x2FCraft\x2D2.2.2601.zip', 'craft', this.craftWasDownloaded)
       }
     });
   },
@@ -25,16 +27,28 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       type: 'confirm',
-      name: 'Craft License',
-      message: 'Do you agree with the craft license?',
+      name: 'craftLicense',
+      message: 'I agree to the terms and conditions. http://buildwithcraft.com/license',
       default: false
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      this.craftLicense = props.craftLicense;
+      if(this.craftLicense){
+        done();
+      } else {
+        console.log('');
+        console.log("You have yo agree with the license to download craft!");
+        console.log('');
 
-      done();
+      }
     }.bind(this));
+  },
+
+  craftWasDownloaded: function(){
+    console.log('-----------------------------');
+    console.log("Craft download completed!");
+    console.log('-----------------------------');
   },
 
   app: function () {
@@ -49,6 +63,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.copy('public/_web.config', 'public/web.config');
     this.copy('public/htaccess', 'public/.htaccess');
 
+    this.mkdir('craft');
     this.mkdir('app');
     this.mkdir('app/templates');
     this.mkdir('app/templates/news');
@@ -72,6 +87,8 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     //Resources
     this.copy('app/resources/js/_app.js', 'app/resources/js/app.js');
     this.copy('app/resources/sass/_main.scss', 'app/resources/sass/main.scss');
+
+
 
   },
 

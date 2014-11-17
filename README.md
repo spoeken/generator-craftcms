@@ -2,26 +2,18 @@
 
 > [Yeoman](http://yeoman.io) generator
 
+Workflow for Craft with Gulp
+-
+Requires [Nodejs](http://nodejs.org/) and [Gulp](http://gulpjs.com/)
 
-## Getting Started
+Getting started
+-
 
-### What is Yeoman?
-
-Trick question. It's not a thing. It's this guy:
-
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+**Install the generator**
 
 ```bash
 $ npm install -g yo
 ```
-
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
 To install generator-craftcms from npm, run:
 
@@ -35,13 +27,78 @@ Finally, initiate the generator:
 $ yo craftcms
 ```
 
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+**Compass needs the compass ruby gem.**
+If you don't already have it: ```gem update --system``` and ```gem install compass```
 
 
-## License
 
-MIT
+
+Tasks
+-
+
+_note: Don't touch the templates folder in ```/craft``` it will be overwritten on build. Work on the ones in ```app/templates```_
+
+* ```gulp watch``` to start the watch task, at the moment you will have to use a browser extention for live reload.
+
+* ```gulp``` to build for production, all the magic happens and template files will be moved to ```craft/templates```, resources (images/js/css) will be concatinated, minified and wrapped in silk before they end up in ```/public```.
+
+* ```gulp bower``` Injects bower dependencies into ```_layout.html```. This task will run on ```gulp watch``` as well.
+_Remember to ```--save``` when installing components_.
+
+Set ```/app``` as server root on development and ```/public``` for production.
+
+
+Gulp Plugins
+-
+
+
+* **compass** -
+_Css compiler_
+
+
+* **autoprefixer** -
+_So we don't have to write -moz-, -webkit-, -ms-, -o-, -all-, -the-, -time-_
+
+
+* **concat** -
+_Merging css and js to single files_
+
+
+* **uglify** -
+_Javascript minifyer_
+
+
+* **jshint** -
+_A tool that helps to detect errors and potential problems in your JavaScript code._
+
+
+* **watch** -
+_The thing that tells us when a file has changed_
+
+
+* **livereload** -
+_Updates our browsers when js or css changes_
+
+
+* **usemin** -
+_Reads the html to know what files to concat and stuff_
+
+
+* **util** -
+_Logs stuff. And it can ```gutil.beep();``` too :o_
+
+
+* **del** -
+_Our garbage guy_
+
+
+* **cache** -
+_A temp file based caching proxy task for Gulp._
+
+
+* **imagemin** -
+_Optimizes images for you._
+
+
+* **wiredep** -
+_Injects script and link tags when you install something with bower._

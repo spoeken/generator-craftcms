@@ -20,12 +20,26 @@ describe('craftcms generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.jshintrc',
+      'package.json',
+      'bower.json',
+      'gulpfile.js',
+      'config.rb',
+      'public/index.php',
+      'public/robots.txt',
+      'public/web.config',
+      'public/.htaccess',
+      'app/index.php',
+      'app/.htaccess',
+      'app/templates/404.html',
+      'app/templates/_layout.html',
+      'app/templates/index.html',
+      'app/templates/news/_entry.html',
+      'app/templates/news/index.html',
+      'app/resources/js/app.js',
+      'app/resources/sass/main.scss',
       '.bowerrc',
       '.gitignore',
-      'config.rb',
-      'gulpfile.js',
-      'package.json'
+      '.jshintrc'
     ];
 
     helpers.mockPrompt(this.app, {

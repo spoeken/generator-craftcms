@@ -1,7 +1,7 @@
 {
   "name": "generator-craftcms",
   "version": "0.1.0",
-  "description": "Yeoman generator",
+  "description": "Craft cms yeoman generator with gulp",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "spoeken/generator-craftcms",

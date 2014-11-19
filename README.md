@@ -1,4 +1,5 @@
 # generator-craftcms [![Build Status](https://secure.travis-ci.org/spoeken/generator-craftcms.png?branch=master)](https://travis-ci.org/spoeken/generator-craftcms)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/spoeken/generator-craftcms?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > [Yeoman](http://yeoman.io) generator
 

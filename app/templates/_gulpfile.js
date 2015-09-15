@@ -18,7 +18,7 @@ var	gulp = require('gulp'),
 
 gulp.task('server', function(next) {
 	var connect = require('connect'),
-			server = connect();
+	server = connect();
 	server.use(connect.static('app')).listen(process.env.PORT || 3000, next);
 });
 
@@ -59,47 +59,62 @@ gulp.task('compass', function(){
 });
 
 gulp.task('jshint', function () {
-  return gulp.src('./app/resources/js/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+	return gulp.src(['./app/resources/js/**/*.js', '!./app/resources/js/vendor/**/*.js'])
+	.pipe(jshint())
+	.pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('images', ['move'], function () {
-  return gulp.src('./app/resources/images/**/*')
-    .pipe(imagemin({
-      progressive: true,
-      interlaced: true
-    }))
-    .pipe(gulp.dest('./public/resources/images'));
+	return gulp.src('./app/resources/images/**/*')
+	.pipe(cache(imagemin({
+		progressive: true,
+		interlaced: true
+	})))
+	.pipe(gulp.dest('./public/resources/images'));
 
 });
 
 gulp.task('fonts', ['move'], function () {
-  return gulp.src('./app/resources/fonts/**/*')
-    .pipe(gulp.dest('./public/resources/fonts'));
+	return gulp.src('./app/resources/fonts/**/*')
+	.pipe(gulp.dest('./public/resources/styles'));
+
+});
+
+gulp.task('json', ['move'], function () {
+	return gulp.src('./app/resources/json/**/*')
+	.pipe(gulp.dest('./public/resources/json'));
 
 });
 
 //Build
 
-gulp.task('usemin', function() {
+gulp.task('usemin', ['templates'], function() {
 
-	return gulp.src('app/templates/**')
+	return gulp.src('./app/templates/_layout.html')
 	.pipe(usemin({
-		js: [uglify()],
-		bower: [uglify()]
+		// js: [uglify()],
+		// bower: [uglify()]
 	}))
-	.pipe(gulp.dest('./craft/templates'));
+	.pipe(gulp.dest('./craft/templates/'));
+
+});
+
+// Moving templates, why does usemin fuck this up?
+
+gulp.task('templates', function(){
+
+	return gulp.src(['./app/templates/**'])
+	.pipe(gulp.dest('./craft/templates/'));
 
 });
 
 
 gulp.task('clean:before', function(cb) {
-    del(['public/resources/**'], cb);
+	del(['public/resources/**'], cb);
 });
 
-gulp.task('clean:after', ['usemin', 'images', 'fonts'], function(cb) {
-    del(['craft/templates/resources/**', 'craft/templates/resources/'], cb);
+gulp.task('clean:after', ['images', 'fonts', 'json'], function(cb) {
+	del(['craft/templates/resources/*/**', 'craft/templates/resources/', 'craft/templates/styles/'], cb);
 });
 
 gulp.task('move', ['usemin', 'clean:before'], function(){
@@ -114,17 +129,11 @@ gulp.task('build', ['clean:after'], function(){
 });
 
 gulp.task('bower', function () {
-  gulp.src('./app/templates/_layout.html')
-    .pipe(wiredep({
+	gulp.src('./app/templates/_layout.html')
+	.pipe(wiredep({
 
-    }))
-    .pipe(gulp.dest('./app/templates/'));
+	}))
+	.pipe(gulp.dest('./app/templates/'));
 });
 
 gulp.task('default', ['build']);
-
-
-
-
-
-

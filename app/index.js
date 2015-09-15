@@ -10,11 +10,15 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
 
+    var self = this;
+    var cb = function(){
+      self.craftWasDownloaded.call(self);
+    }
+
     this.on('end', function () {
       if (!this.options['skip-install']) {
-        this.installDependencies();
         //Download Craft
-        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', 'craft', this.craftWasDownloaded);
+        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', './', cb);
       }
     });
   },
@@ -38,7 +42,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
         done();
       } else {
         console.log('');
-        console.log('You have yo agree with the license to download craft!');
+        console.log("You have yo agree with the license to download craft!");
         console.log('');
 
       }
@@ -47,8 +51,12 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
 
   craftWasDownloaded: function(){
     console.log('-----------------------------');
-    console.log('Craft download completed!');
+    console.log("Craft download completed!");
     console.log('-----------------------------');
+    //Create folder for craft
+    this.mkdir('craft/storage');
+    this.installDependencies();
+
   },
 
   app: function () {
@@ -57,13 +65,6 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.copy('_gulpfile.js', 'gulpfile.js');
     this.copy('_config.rb', 'config.rb');
 
-    this.mkdir('public');
-    this.copy('public/_index.php', 'public/index.php');
-    this.copy('public/_robots.txt', 'public/robots.txt');
-    this.copy('public/_web.config', 'public/web.config');
-    this.copy('public/htaccess', 'public/.htaccess');
-
-    this.mkdir('craft');
     this.mkdir('app');
     this.mkdir('app/templates');
     this.mkdir('app/templates/news');
@@ -73,6 +74,7 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.mkdir('app/resources/sass');
     this.mkdir('app/resources/fonts');
     this.mkdir('app/resources/images');
+    this.mkdir('app/resources/json');
 
     this.copy('app/_index.php', 'app/index.php');
     this.copy('app/htaccess', 'app/.htaccess');

@@ -1,6 +1,6 @@
 {
   "name": "generator-craftcms",
-  "version": "0.1.5",
+  "version": "0.1.4",
   "description": "Craft cms yeoman generator with gulp",
   "license": "MIT",
   "main": "app/index.js",
@@ -25,8 +25,8 @@
     "cms"
   ],
   "dependencies": {
-    "chalk": "~0.4.0",
-    "yeoman-generator": "~0.16.0",
+    "chalk": "^0.5.1",
+    "yeoman-generator": "^0.18.0",
     "yosay": "^1.0.0"
   },
   "devDependencies": {

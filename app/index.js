@@ -11,14 +11,24 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.pkg = require('../package.json');
 
     var self = this;
-    var cb = function(){
-      self.craftWasDownloaded.call(self);
-    }
 
     this.on('end', function () {
       if (!this.options['skip-install']) {
-        //Download Craft
-        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', './', cb);
+        //Download and extract Craft
+
+        this.extract('http://buildwithcraft.com/latest.zip?accept_license=yes', './', function(err, remote) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('-----------------------------');
+            console.log("Craft download completed!");
+            console.log('-----------------------------');
+
+            //Create storage folder for craft
+            self.mkdir('craft/storage');
+          }
+
+        });
       }
     });
   },
@@ -47,16 +57,6 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
 
       }
     }.bind(this));
-  },
-
-  craftWasDownloaded: function(){
-    console.log('-----------------------------');
-    console.log("Craft download completed!");
-    console.log('-----------------------------');
-    //Create folder for craft
-    this.mkdir('craft/storage');
-    this.installDependencies();
-
   },
 
   app: function () {
@@ -90,6 +90,8 @@ var CraftcmsGenerator = yeoman.generators.Base.extend({
     this.copy('app/resources/js/_app.js', 'app/resources/js/app.js');
     this.copy('app/resources/sass/_main.scss', 'app/resources/sass/main.scss');
     this.copy('app/resources/css/_main.css', 'app/resources/css/main.css');
+
+    // this.installDependencies();
   },
 
   projectfiles: function () {

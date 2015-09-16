@@ -24,10 +24,6 @@ describe('craftcms generator', function () {
       'bower.json',
       'gulpfile.js',
       'config.rb',
-      'public/index.php',
-      'public/robots.txt',
-      'public/web.config',
-      'public/.htaccess',
       'app/index.php',
       'app/.htaccess',
       'app/templates/404.html',
@@ -46,7 +42,7 @@ describe('craftcms generator', function () {
       'craftLicense': true
     });
     this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
+    this.app.run(function () {
       helpers.assertFile(expected);
       done();
     });

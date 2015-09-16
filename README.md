@@ -42,6 +42,7 @@ _note: Don't touch the templates folder in ```/craft``` it will be overwritten o
 * ```gulp watch``` to start the watch task, at the moment you will have to use a browser extention for live reload.
 
 * ```gulp``` to build for production, all the magic happens and template files will be moved to ```craft/templates```, resources (images/js/css) will be concatinated, minified and wrapped in silk before they end up in ```/public```.
+*Having some issues with uglyfication of js*.
 
 * ```gulp bower``` Injects bower dependencies into ```_layout.html```. This task will run on ```gulp watch``` as well.
 _Remember to ```--save``` when installing components_.

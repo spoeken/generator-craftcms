@@ -18,16 +18,18 @@ var	gulp = require('gulp'),
 
 gulp.task('server', function(next) {
 	var connect = require('connect'),
-	server = connect();
-	server.use(connect.static('app')).listen(process.env.PORT || 3000, next);
+	serveStatic = require('serve-static');
+	app = connect();
+	app.use(serveStatic('app', {}));
+	app.listen(process.env.PORT || 3000, next);
 });
 
 gulp.task('watch', ['server'], function() {
 
-	var server = livereload();
+	livereload({ start: true });
 
 	gulp.watch('app/resources/css/**').on('change', function(file) {
-		server.changed(file.path);
+		livereload.changed(file.path);
 	});
 
 	gulp.watch('app/resources/sass/**').on('change', function(file){
@@ -109,15 +111,15 @@ gulp.task('templates', function(){
 });
 
 
-gulp.task('clean:before', function(cb) {
-	del(['public/resources/**'], cb);
-});
+
 
 gulp.task('clean:after', ['images', 'fonts', 'json'], function(cb) {
 	del(['craft/templates/resources/*/**', 'craft/templates/resources/', 'craft/templates/styles/'], cb);
 });
 
-gulp.task('move', ['usemin', 'clean:before'], function(){
+gulp.task('move', ['usemin'], function(){
+	//Delete old resources
+	del(['public/resources/**']);
 	//Move
 	return gulp.src(['craft/templates/resources/**'])
 	.pipe(gulp.dest('public/resources/'));

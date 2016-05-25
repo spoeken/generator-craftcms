@@ -9,57 +9,60 @@
  # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
  #}
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
-<head>
-	<meta charset="utf-8" />
-	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
-	<link rel="home" href="{{ siteUrl }}" />
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test3</title>
 
-	<!-- build:css(app) styles/vendor.css -->
-		<link rel="stylesheet" href="/resources/bower_components/normalize-css/normalize.css" />
-	<!-- endbuild -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-	<!-- build:css(app) /resources/css/style.css -->
-	    <link rel="stylesheet" href="/resources/css/main.css">
-	<!-- endbuild -->
-
-	<!-- build:js(app) /resources/js/vendor/modernizr.js -->
-	    <script src="/resources/bower_components/modernizr/modernizr.js"></script>
+    <!-- build:css resources/styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
     <!-- endbuild -->
-</head>
 
-<body>
-	<div id="container">
-		<header id="header">
-			<h1><a href="{{ siteUrl }}">{{ siteName }}</a></h1>
+    <!-- build:css resources/styles/main.css -->
+    <link rel="stylesheet" href="tmp/styles/main.css">
+    <!-- endbuild -->
 
-			<nav>
-				<ul>
-					<li><a href="{{ url('news') }}" {% if craft.request.firstSegment == 'news' %}class="active"{% endif %}>News</a></li>
-				</ul>
-			</nav>
-		</header>
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-		<main id="content" role="main">
-			{% block content %}
-				<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
-				<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
-			{% endblock %}
-		</main>
+    <main id="content" role="main">
+      {% block content %}
+        <p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+        <p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+      {% endblock %}
+    </main>
 
-		<footer id="footer">
-			Copyright {{ now.year }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://buildwithcraft.com">Craft</a>
-		</footer>
-	</div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
 
-	<!-- build:bower(app) /resources/js/vendor.js -->
-	    <script src="/resources/bower_components/jquery/dist/jquery.js"></script>
-	<!-- endbuild -->
+    <!-- build:js resources/scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
 
-	<!-- build:js(app) /resources/js/app.min.js -->
-	    <script src="/resources/js/app.js"></script>
-	<!-- endbuild -->
+    <!-- build:js resources/scripts/plugins.js -->
+    <!-- endbuild -->
 
-</body>
+    <!-- build:js resources/scripts/main.js -->
+    <script src="tmp/scripts/bundle.js"></script>
+    <!-- endbuild -->
+  </body>
 </html>
+
